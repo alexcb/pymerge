@@ -32,14 +32,13 @@ PyObject* merge( PyObject* self, PyObject* args )
 		if( i1 < n1 ) {
 			if( !elem1) {
 				elem1 = PyList_GetItem( listObj1, i1 );
+				Py_INCREF( elem1 );
 			}
 			if( i2 < n2 ) {
 				if( !elem2 ) {
 					elem2 = PyList_GetItem( listObj2, i2 );
+					Py_INCREF( elem2 );
 				}
-				// PyObject_RichCompareBool appears to be stealing the reference
-				Py_INCREF( elem1 );
-				Py_INCREF( elem2 );
 				result = PyObject_RichCompareBool( elem1, elem2, Py_LE );
 				switch( result ) {
 				case 1:
@@ -56,6 +55,8 @@ PyObject* merge( PyObject* self, PyObject* args )
 
 				default:
 					// error occured
+					printf("ERROR!\n");
+					// TODO release references
 					return NULL; /* TODO should raise an error */
 				}
 			}
@@ -68,6 +69,7 @@ PyObject* merge( PyObject* self, PyObject* args )
 		else {
 			if( i2 < n2 ) {
 				elem2 = PyList_GetItem( listObj2, i2 );
+				Py_INCREF( elem2 );
 				PyList_SetItem( mergedList, i++, elem2 );
 				elem2 = NULL;
 				i2++;
