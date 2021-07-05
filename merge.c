@@ -80,8 +80,5 @@ PyObject* merge( PyObject* self, PyObject* args )
 		}
 	}
 
-	Py_DECREF( listObj1 );
-	Py_DECREF( listObj2 );
-
 	return mergedList;
 }
