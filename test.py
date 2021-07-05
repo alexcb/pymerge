@@ -1,10 +1,9 @@
 import merge
 
-a = [1,3,10]
-b = [2,8,9]
+a = [-1,3.14,10]
+b = [2,8,9,100]
 
+print(f'list a is {a}')
+print(f'list b is {b}')
 c = merge.merge(a, b)
-print(c)
-
-print("we're done here")
-# TODO merge module unload is erroring
+print(f'merged list is {c}')
